@@ -28,6 +28,9 @@ const RejectFollowReq = ({ rejectFollowId }) => {
       //     )
       //   );
       // }
+      setRejectReq((prevRequest)=>{
+        prevRequest.filter((request)=>request.follower !== rejectFollowId);
+      })
     } catch (error) {
       console.log("reject Follow Req Error:", error);
     }

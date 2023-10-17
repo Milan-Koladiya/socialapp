@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import useToken from "../../hook/useToken";
+import { useParams } from "react-router-dom";
 
-const UpdatePost = (postId) => {
+const UpdatePost = () => {
+  const {id} = useParams();
+  console.log("postId=====>",id);
     const {token} = useToken();
 
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
 
-  console.log("postId======>", postId);
+  console.log("postId======>", id);
   const handleUpdate = async () => {
     try {
+  console.log("postId======>", id);
+
       const UpdatePostRes = await fetch(
-        `http://localhost:4500/update/post${postId}`,
+        `http://localhost:4500/update/post/${id}`,
         {
           method: "PUT",
           headers: {

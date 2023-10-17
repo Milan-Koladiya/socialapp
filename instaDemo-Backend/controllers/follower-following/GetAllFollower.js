@@ -1,6 +1,8 @@
 const Follow = require("../../model/FollwerSchema");
 
 const GetAllFollower = async (req, res) => {
+  console.log("AllFollower=====>");
+
   try {
     const MyId = req.user._id;
     console.log("myid===>" + MyId);
@@ -9,7 +11,8 @@ const GetAllFollower = async (req, res) => {
       user: MyId,
 
       // status: "follower",
-    });
+    }).populate('follower')
+    console.log("AllFollower=====>",AllFollower);
     if (AllFollower.length > 0) {
       res
         .status(200)

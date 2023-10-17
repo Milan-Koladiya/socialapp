@@ -5,13 +5,15 @@ import useToken from "../../../hook/useToken";
 import { MenuBar } from "../../Navbar";
 import Button from "react-bootstrap/Button";
 
+
+
 const Follower = () => {
   const { token } = useToken();
   const [allFollower, setAllFollower] = useState([]);
 
   const handleAllFollower = async (e) => {
     e.preventDefault();
-
+  
     try {
       const followerResponce = await fetch(
         "http://localhost:4500/getFollower",
@@ -23,8 +25,9 @@ const Follower = () => {
         }
       );
       const GetFollower = await followerResponce.json();
-
-      console.log("getFollower===>", GetFollower?.followers);
+console.log("getFollower=================>",GetFollower);
+      console.log("getFollower===>", GetFollower?.followers?.follower[0]);
+      // console.log("getFollower===>", GetFollower?.followers[0].follower);
       // console.log("getFollower===>", GetFollower?.followers?.[0]?.status);
       // const getStatus = (GetFollower?.followers.map((status) => status.status)).toString();
       // const followerList = (GetFollower?.followers.map((status)=>status.status)).filter((isAccepted)=> isAccepted !== "accepted")

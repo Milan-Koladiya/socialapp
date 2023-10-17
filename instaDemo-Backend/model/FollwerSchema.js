@@ -28,17 +28,17 @@ const mongoose = require("mongoose");
 const followSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'users',
     required: true,
   },
   follower: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'users',
     // required: true,
   },
   following:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'user',
+    ref:'users',
     // require:true 
   },
   status: {

@@ -3,7 +3,7 @@ const Post = require("../../model/PostSchema");
 
 
 const CreatePost = async (req, res) => {
-  console.log("cretae post====>")
+  console.log("cretae post====>", req)
   // router.post("/post",verifyToken,async(req,res)=>{
   try {
     

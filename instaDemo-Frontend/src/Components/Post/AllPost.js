@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+// import { useHistory } from "react-router-dom";
+
+// import { generatePath } from "react-router-dom";
 import useToken from "../../hook/useToken";
 import { Button } from "react-bootstrap";
 
@@ -9,7 +14,12 @@ import DeletePostButton from "../UI Component/DeletePostButton";
 const AllPost = () => {
   const { token } = useToken();
   const [posts, setPosts] = useState([]);
-const [handle, setHandle] = useState(false);
+  const [handle, setHandle] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [id, setId] = useState();
+
+  // const history = useHistory();
 
   const handleAllPost = async (e) => {
     e.preventDefault();
@@ -27,19 +37,49 @@ const [handle, setHandle] = useState(false);
       console.log("All pOst error=======>", error);
     }
   };
-  const handleTrue = ()=>{
-  setHandle(true);
-  }
-console.log("post====>",posts)
+
+  const handleTrue = () => {
+    setHandle(true);
+  };
+
+  const handleConfirmUpdate = (e) => {
+    // history.push(generatePath`/updatePost/${id}`));
+  };
+  // const handleUpdate = async () => {
+  //   try {
+  //     const UpdatePostRes = await fetch(
+  //       `http://localhost:4500/update/post${postId}`,
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({
+  //           title: title,
+  //           description: description,
+  //         }),
+  //       }
+  //     );
+  //     const updateP = await UpdatePostRes.json();
+  //     console.log("updateP=====>", updateP);
+
+  //   } catch (error) {
+
+  //     console.log("update post error======>", error);
+
+  //   }
+  // };
+  console.log("post====>", posts);
   return (
     <>
       <Button onClick={handleAllPost}>show All post</Button>
-      {posts?.map((item) => {
+      {posts?.map((item, i) => {
+        console.log('item?.image', item?.image)
         return (
           <>
             <div className="text-center">
               <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={`public/posts/${item.image}`}>
+                <Card.Img variant="top" src={`http://localhost:3000/${item.image}`}>
                   {/* {item.image} */}
                 </Card.Img>
                 <Card.Body>
@@ -48,13 +88,23 @@ console.log("post====>",posts)
                   {/* <p >posted at:{item.createAt}</p> */}
                   {/* <Button variant="primary">Go somewhere</Button> */}
 
-                  <Button variant="info" postId={item.id} onClick={handleTrue}><Link to='/updatePost'>Update post</Link></Button>
-                
-                {/* {
+                  <Button variant="info" postId={item.id} ><Link to={`/updatePost/${item._id}`}>Update post</Link></Button>
+                 
+                  {/* <Button variant="info" postId={item.id}><Link to='/updatePost'>Update post</Link></Button> */}
+                  {/* <Button
+                    variant="info"
+                    key={i}
+                    onClick={(e) => {
+                      setId(item.id);
+                      handleConfirmUpdate();
+                    }}
+                  >
+                    Update Post
+                  </Button> */}
 
-                    handle ?<UpdatePost postId={item.id}></UpdatePost> : null 
-                } */}
-                <DeletePostButton deletePostId = {item._id}></DeletePostButton>
+                  {handle ? <UpdatePost postId={item.id}></UpdatePost> : null}
+
+                  <DeletePostButton deletePostId={item._id}></DeletePostButton>
                 </Card.Body>
               </Card>
             </div>

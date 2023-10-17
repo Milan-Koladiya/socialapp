@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useToken from "../../hook/useToken";
 import { Button } from "react-bootstrap";
 
-const DeletePostButton = (deletePostId) => {
+const DeletePostButton = ({deletePostId}) => {
+
     console.log("deletePsot id====>",deletePostId);
   const { token } = useToken();
 
@@ -19,7 +20,7 @@ const DeletePostButton = (deletePostId) => {
           },
         }
       );
-      const Deletepost = DeletePostRes.json();
+      const Deletepost = await DeletePostRes.json();
       console.log("deletePost====>",Deletepost);
 
     } catch (error) {

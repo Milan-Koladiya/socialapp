@@ -50,7 +50,7 @@ const MainRoute = () => {
           element={token ? <AllPost /> : <Login />}
         ></Route>
         <Route
-          path="/updatePost"
+          path="/updatePost/:id"
           element={token ? <UpdatePost /> : <Login />}
         ></Route>
         <Route

@@ -13,6 +13,7 @@ const Following = () => {
   const handleFollowing = async (e) => {
     e.preventDefault();
 
+    
 
     try {
       const FollowingResponce = await fetch(
