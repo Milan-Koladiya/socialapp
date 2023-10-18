@@ -30,6 +30,7 @@ const GetAllFollowing = require('../controllers/follower-following/GetAllFollowi
 const PostLike = require('../controllers/Likes/likes');
 const AcceptFollowReq = require('../controllers/follower-following/acceptFollowReq');
 const RejectFollowReq = require('../controllers/follower-following/rejectFollowReq');
+const searchUser = require('../controllers/User/searchUser');
 
 //registration
 router.post('/registration',UserRegistration);
@@ -40,6 +41,8 @@ router.post('/login',UserLogin);
 //getdata
 router.get('/login/data',VerifyToken,Getdata)
 
+//searchUser
+router.get('/search/users',VerifyToken,searchUser);
 
 
 //create post

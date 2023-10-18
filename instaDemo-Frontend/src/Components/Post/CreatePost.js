@@ -4,9 +4,12 @@ import Button from "react-bootstrap/Button";
 
 import useToken from "../../hook/useToken";
 import { MenuBar } from "../Navbar";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = (e) => {
 const {token} = useToken();
+const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -39,6 +42,7 @@ console.log("image======> ",image);
 
       const Post = await newPostResponce.json();
       console.log("Post", Post);
+      navigate('/allpost'); 
     } catch (error) {
       console.log("createPost Error", error);
     }

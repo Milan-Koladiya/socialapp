@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 import useToken from "../../hook/useToken";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const UpdatePost = () => {
+const UpdatePost = (e) => {
+  // e.preventDefault();
   const {id} = useParams();
+  const navigate = useNavigate();
   console.log("postId=====>",id);
     const {token} = useToken();
 
@@ -17,11 +20,12 @@ const UpdatePost = () => {
   console.log("postId======>", id);
 
       const UpdatePostRes = await fetch(
-        `http://localhost:4500/update/post/${id}`,
+        `http://localhost:4500/update/${id}`,
         {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             title: title,
@@ -29,12 +33,14 @@ const UpdatePost = () => {
           }),
         }
       );
+ 
+
       const updateP = await UpdatePostRes.json();
       console.log("updateP=====>", updateP);
-
+      navigate('/allpost')
     } catch (error) {
 
-      console.log("update post error======>", error);
+      console.log("update post error======>", error); 
 
     }
   };
@@ -50,6 +56,25 @@ const UpdatePost = () => {
    
     </div>
       <Button onClick={handleUpdate}>confirm update post</Button>
+
+
+  
+      {/* <Form onSubmit={handleUpdate}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Title : </Form.Label>
+        <Form.Control type="text" placeholder="Enter Title" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
+       
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Description :</Form.Label>
+        <Form.Control type="text" placeholder="Enter Description" value={description} onChange={(e)=>{setDescription(e.target.description)}} />
+      </Form.Group>
+   
+      <Button variant="primary" type="submit" >
+        Confirm Update
+      </Button>
+    </Form> */}
     </>
   );
 };

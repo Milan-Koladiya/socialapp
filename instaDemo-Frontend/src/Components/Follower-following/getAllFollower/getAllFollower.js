@@ -26,7 +26,7 @@ const Follower = () => {
       );
       const GetFollower = await followerResponce.json();
 console.log("getFollower=================>",GetFollower);
-      console.log("getFollower===>", GetFollower?.followers?.follower[0]);
+      console.log("getFollower===>", GetFollower?.followers);
       // console.log("getFollower===>", GetFollower?.followers[0].follower);
       // console.log("getFollower===>", GetFollower?.followers?.[0]?.status);
       // const getStatus = (GetFollower?.followers.map((status) => status.status)).toString();
@@ -34,13 +34,22 @@ console.log("getFollower=================>",GetFollower);
       // // getStatus.toString();
       // console.log("getStatus", getStatus);
 
-      // if(getStatus === "accepted")
-      // {
-      //   setAllFollower('')
-      // }else{
-      //   setAllFollower(followerList)
-      // }
-      setAllFollower(GetFollower?.followers);
+
+
+      let confirmFollower = GetFollower?.followers.filter((follow)=>follow.status == "accepted");
+
+      console.log("confirmFollower=========>",confirmFollower);
+        
+      if(confirmFollower.length > 0)
+      {
+        setAllFollower(confirmFollower);
+        
+      }else{
+        alert("you have not any follower");
+      }
+      
+    
+      // setAllFollower(GetFollower?.followers);
     } catch (error) {
       console.log("error" + error);
     }
@@ -75,7 +84,7 @@ console.log("getFollower=================>",GetFollower);
           <h3>You have Not Any Followers</h3>
         ) : (
           (allFollower || [])?.map((user, id) => {
-            return <li key={id}>{user.follower}</li>;
+            return <li key={id}>{user.follower.name}</li>; 
           })
         )}
       </div>

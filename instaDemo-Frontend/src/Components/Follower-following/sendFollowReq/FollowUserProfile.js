@@ -35,10 +35,10 @@ const FollowUserProfile = () => {
 
   return (
     <>
-    <MenuBar />
-    <div className="text-center mt-4">
+    {/* <MenuBar /> */}
+    <div className="text-center mt-4 ms-5 mb-3">
 
-     <h3>Targetd User Profile</h3>
+     {/* <h3>Targetd User Profile</h3> */}
       <Button onClick={handleFollowClick}>Follow</Button>
       {/* <FollowButton userId={user} onFollowClick={handleFollowClick} /> */}
     </div>

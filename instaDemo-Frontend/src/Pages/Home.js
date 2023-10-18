@@ -54,6 +54,7 @@ export const Home = () => {
 
       <div className="container-fluid">
         <MenuBar />
+
         <div>
           {/* <Button onClick={handleUserInfo}> Get user Info</Button> */}
 
@@ -78,9 +79,9 @@ export const Home = () => {
                 <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Button variant="outline-secondary">
+                {/* <Button variant="outline-secondary">
                   <Link to="/sendFollowReq">Get new Following</Link>
-                </Button>
+                </Button> */}
                 {/* <Card.Link href="#">Card Link</Card.Link> */}
                 {/* <Card.Link href="#">Another Link</Card.Link> */}
               </Card.Body>

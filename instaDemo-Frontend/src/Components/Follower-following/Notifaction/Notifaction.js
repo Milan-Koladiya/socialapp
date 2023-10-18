@@ -27,7 +27,12 @@ const Notifaction = () => {
       );
       const GetFollowerReq = await resAllfollowerReq.json();
       console.log("GetFollowerRew====>", GetFollowerReq.followers);
-      setAllFollowerReq(GetFollowerReq?.followers);
+      let prevFollowerReqs = GetFollowerReq?.followers?.map((followStatus)=>followStatus)
+      // console.log("GetFollowerRew====>", GetFollowerReq);
+      // let prevFollowerReqs = GetFollowerReq?.followers.filter((followStatus)=>followStatus.status == "pending")
+      console.log("prevFollow req-===========>",prevFollowerReqs);
+      // setAllFollowerReq(GetFollowerReq?.followers);
+      setAllFollowerReq(prevFollowerReqs);
     } catch (error) {
       console.log("allFollowReq error", error);
     }
@@ -108,7 +113,7 @@ const Notifaction = () => {
                 className="d-flex justify-content-between align-items-start"
               >
                 <div className="ms-2 me-auto">
-                  <div className="fw-bold">{user.follower}</div>
+                  <div className="fw-bold">{user.name}</div>
                   {/* <Button
                     variant="outline-danger"
                     className="me-3"

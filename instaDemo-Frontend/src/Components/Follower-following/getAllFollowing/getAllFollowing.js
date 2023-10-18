@@ -27,9 +27,22 @@ const Following = () => {
       );
       const GetFollowing = await FollowingResponce.json();
       console.log("get All Following====>", GetFollowing);
-      console.log("get All FollowingID====>", GetFollowing?.Following);
+      console.log("get All FollowingID====>", GetFollowing?.Following?.following);
 
-      setAllFollowing(GetFollowing?.Following);
+
+      let confirmFollowing = GetFollowing?.Following.filter((follow)=>follow.status == "accepted");
+
+      console.log("confirmFollowing=========>",confirmFollowing);
+        
+      if(confirmFollowing.length > 0)
+      {
+        setAllFollowing(confirmFollowing);
+        
+      }else{
+        alert("you have not any follower");
+      }
+      
+      // setAllFollowing(GetFollowing?.Following);
     } catch (error) {
       console.log("get All Following error", error);
     }
@@ -71,9 +84,10 @@ const Following = () => {
               <ListGroup.Item
                 as="li"
                 className="d-flex justify-content-between align-items-start"
+                key={id}
               >
                 <div className="ms-2 me-auto">
-                  <div className="fw-bold">{user.following}</div>
+                  <div className="fw-bold">{user.following.userName}</div>
                 </div>
                 {/* <Button onClick={()=>handleUnFollow(user.following)} >Unfollow</Button> */}
                 <UnfollowUserButton unfollwingId={user.following} ></UnfollowUserButton>

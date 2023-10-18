@@ -35,6 +35,8 @@ const RejectFollowReq = ({ rejectFollowId }) => {
       console.log("reject Follow Req Error:", error);
     }
   };
+
+  
   return (
     <>
       {/* <Button

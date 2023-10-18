@@ -63,14 +63,15 @@ const AcceptFollowButton = ({ AcceptReqId }) => {
       const AcceptedReq = await resAcceptFollowReq.json();
       console.log("acceptedReqStatus====>", AcceptedReq?.status?.follower);
       
-      if (AcceptedReq.status === "accepted") {
-        // Update the component state to indicate acceptance.
+     
+      // if (AcceptedReq.status === "accepted") {
+      //   // Update the component state to indicate acceptance.
 
-        // setAccepted(true);
-        setAccepted((prevFollowerReqs)=>{
-          prevFollowerReqs?.status?.follower.filter((request)=>request !== AcceptReqId)
-        })
-      }
+      //   // setAccepted(true);
+      //   setAccepted((prevFollowerReqs)=>{
+      //     prevFollowerReqs?.status?.follower.filter((request)=>request !== AcceptReqId)
+      //   })
+      // }
     } catch (error) {
       console.log("AcceptFollowReq error", error);
     }

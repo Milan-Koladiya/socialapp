@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // import { useHistory } from "react-router-dom";
@@ -22,7 +22,7 @@ const AllPost = () => {
   // const history = useHistory();
 
   const handleAllPost = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const allPostResponce = await fetch(`http://localhost:4500/user/posts`, {
         method: "GET",
@@ -37,7 +37,10 @@ const AllPost = () => {
       console.log("All pOst error=======>", error);
     }
   };
+useEffect(()=>{
+    handleAllPost();
 
+},[]);
   const handleTrue = () => {
     setHandle(true);
   };
@@ -45,6 +48,7 @@ const AllPost = () => {
   const handleConfirmUpdate = (e) => {
     // history.push(generatePath`/updatePost/${id}`));
   };
+
   // const handleUpdate = async () => {
   //   try {
   //     const UpdatePostRes = await fetch(
@@ -90,6 +94,7 @@ const AllPost = () => {
 
                   <Button variant="info" postId={item.id} ><Link to={`/updatePost/${item._id}`}>Update post</Link></Button>
                  
+                 <Button variant="info"><Link to={`/deletepost/${item._id}`}>Delete Post</Link></Button>
                   {/* <Button variant="info" postId={item.id}><Link to='/updatePost'>Update post</Link></Button> */}
                   {/* <Button
                     variant="info"
@@ -101,10 +106,11 @@ const AllPost = () => {
                   >
                     Update Post
                   </Button> */}
+ 
+                  {/* {handle ? <UpdatePost postId={item.id}></UpdatePost> : null} */}
 
-                  {handle ? <UpdatePost postId={item.id}></UpdatePost> : null}
 
-                  <DeletePostButton deletePostId={item._id}></DeletePostButton>
+                  {/* <DeletePostButton deletePostId={item._id} ></DeletePostButton> */}
                 </Card.Body>
               </Card>
             </div>

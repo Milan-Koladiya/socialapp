@@ -1,6 +1,6 @@
 const Follow = require("../../model/FollwerSchema");
 
-const GetAllFollower = async (req, res) => {
+const   GetAllFollower = async (req, res) => {
   console.log("AllFollower=====>");
 
   try {
