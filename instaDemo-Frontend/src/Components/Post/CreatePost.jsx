@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import useToken from "../../hook/useToken";
 import { MenuBar } from "../Navbar";
 import { useNavigate } from "react-router-dom";
+import Clientaxios from "../../api/axios";
 
 const CreatePost = (e) => {
 const {token} = useToken();
@@ -13,6 +14,7 @@ const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
 //  const ImgInputRef = useRef(null);
 
 // useEffect(()=>{
@@ -22,6 +24,7 @@ console.log("image======> ",image);
   const handleImage = (e) => {
     const file = e.target.files[0];
       setImage(file);
+      setFile(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleCreatePost = async () => {
@@ -32,14 +35,17 @@ console.log("image======> ",image);
       formData.append("description", description);
       formData.append("image", image);
 
-      const newPostResponce = await fetch("http://localhost:4500/user/post", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      // const newPostResponce = await fetch("http://localhost:4500/user/post", {
+      //   method: "POST",
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   body: formData,
+      // });
 
+      const newPostResponce = await Clientaxios.post('/user/post',{
+        formData
+      })
       const Post = await newPostResponce.json();
       console.log("Post", Post);
       navigate('/allpost'); 
@@ -85,6 +91,8 @@ console.log("image======> ",image);
             // ref={ImgInputRef}
             onChange={(e)=>handleImage(e)}
           />
+         
+         <img src={file} alt="" />
           <br />
           <Button
             variant="outline-danger"

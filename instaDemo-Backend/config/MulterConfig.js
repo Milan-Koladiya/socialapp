@@ -9,15 +9,23 @@ const Storage = multer.diskStorage({
         }, 
         filename:function(req,file,callbk){
             // callbk(null, file.name + "-" + Date.now())
-            callbk(null,file.originalname);
+            callbk(null,`${file.originalname}`);
             console.log("filename")
         }
     })
     
-
+const fileFilter = (req,file,callbk)=>{
+    const allowFileTypes = ["image/jpeg", "image/jpg", "image/png"]
+        if(allowFileTypes.includes(file.mimetype)){
+            callbk(null,true)
+        }else{
+            callbk(null,false)
+        }
+}
 
 const UploadFile = multer({
-    storage:Storage
+    storage:Storage,
+    fileFilter
 }).single('image');
 
 module.exports = UploadFile;

@@ -47,12 +47,16 @@ const AcceptFollowButton = ({ AcceptReqId }) => {
   const [accepted, setAccepted] = useState({});
 
 
+
   const handleAcceptFollowReq = async () => {
     try {
       console.log("receiverId====>", AcceptReqId);
-
+      const AcceptedID = AcceptReqId._id;
+      const AcceptedName = AcceptReqId.userName;
+      console.log("accepteduserNAme====>",AcceptedName);
+      console.log("acceptedID======>",AcceptReqId._id)
       const resAcceptFollowReq = await fetch(
-        `http://localhost:4500/acceptFollow/${AcceptReqId}`,
+        `http://localhost:4500/acceptFollow/${AcceptedID}`,
         {
           method: "POST",
           headers: {
@@ -61,9 +65,9 @@ const AcceptFollowButton = ({ AcceptReqId }) => {
         }
       );
       const AcceptedReq = await resAcceptFollowReq.json();
-      console.log("acceptedReqStatus====>", AcceptedReq?.status?.follower);
+      console.log("acceptedReqName====>", AcceptedReq);
       
-     
+      alert(` you accept follow req of ${AcceptedName}`);
       // if (AcceptedReq.status === "accepted") {
       //   // Update the component state to indicate acceptance.
 

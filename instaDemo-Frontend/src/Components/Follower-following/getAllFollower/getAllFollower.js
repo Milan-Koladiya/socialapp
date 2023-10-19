@@ -4,6 +4,7 @@ import "../../../css files/HomeCss.css";
 import useToken from "../../../hook/useToken";
 import { MenuBar } from "../../Navbar";
 import Button from "react-bootstrap/Button";
+import Clientaxios from "../../../api/axios";
 
 
 
@@ -11,20 +12,30 @@ const Follower = () => {
   const { token } = useToken();
   const [allFollower, setAllFollower] = useState([]);
 
+  const axiosInstance = Clientaxios();
+
   const handleAllFollower = async (e) => {
     e.preventDefault();
   
     try {
-      const followerResponce = await fetch(
-        "http://localhost:4500/getFollower",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const GetFollower = await followerResponce.json();
+
+      // const followerResponce = await fetch(
+      //   "http://localhost:4500/getFollower",
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      // const GetFollower = await followerResponce.json();
+
+      const followerResponce = await axiosInstance.get('/getFollower');
+      const GetFollower =  followerResponce.data;
+
+
+
+      // const followerResponce = axiosInstance.get('/getFollower')
 console.log("getFollower=================>",GetFollower);
       console.log("getFollower===>", GetFollower?.followers);
       // console.log("getFollower===>", GetFollower?.followers[0].follower);

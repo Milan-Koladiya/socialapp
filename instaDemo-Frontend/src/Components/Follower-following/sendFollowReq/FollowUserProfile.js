@@ -4,27 +4,34 @@ import FollowButton from "../../UI Component/FollowButton";
 import useToken from "../../../hook/useToken";
 import { Button } from "react-bootstrap";
 import { MenuBar } from "../../Navbar";
+import Clientaxios from "../../../api/axios";
 
-const FollowUserProfile = () => {
+const FollowUserProfile = ({followID}) => {
   const { token } = useToken();
   const handleFollowClick = async (e) => {
-
+     console.log("followId==========>",followID);
     e.preventDefault();
-    const user = {
-      id: "651e5fd8c81ff322a5f8ecd0",
-    };
-    console.log("targetedUserId=====>", user.id);
+    // const user = {
+    //   id: "651e5fd8c81ff322a5f8ecd0",
+    // };
+    const id = followID
+    console.log("targetedUserId=====>", id);
     try {
-      const sendFollowingResponce = await fetch(
-        `http://localhost:4500/following/${user.id}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const sendFollowing = await sendFollowingResponce.json();
+      // const sendFollowingResponce = await fetch(
+      //   `http://localhost:4500/following/${user.id}`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      // const sendFollowing = await sendFollowingResponce.json();
+
+      const sendFollowingResponce = await Clientaxios.post(`/following/${followID}`);
+      const sendFollowing = await sendFollowingResponce.data;
+
+
       console.log("sendFollowing====>", sendFollowing);
     } catch (error) {
       console.log("sendFollowing req==>", error);

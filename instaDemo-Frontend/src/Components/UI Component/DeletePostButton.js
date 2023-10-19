@@ -3,6 +3,7 @@ import useToken from "../../hook/useToken";
 import { Button } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate, useParams } from "react-router-dom";
+import Clientaxios from "../../api/axios";
 
 const DeletePostButton = () => {
   const {deletePostId} = useParams();
@@ -14,18 +15,23 @@ const DeletePostButton = () => {
   const handleDelete = async (e) => {
     // e.preventDefault();
     try {
-      console.log("deletePsot id====>", deletePostId);
 
-      const DeletePostRes = await fetch(
-        `http://localhost:4500/post/delete/${deletePostId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const Deletepost = await DeletePostRes.json();
+      // console.log("deletePsot id====>", deletePostId);
+
+      // const DeletePostRes = await fetch(
+      //   `http://localhost:4500/post/delete/${deletePostId}`,
+      //   {
+      //     method: "DELETE",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      // const Deletepost = await DeletePostRes.json();
+
+      const DeletePostRes = await Clientaxios.delete(`/delete/${deletePostId}`);
+      const Deletepost = await DeletePostRes.data;
+
       console.log("deletePost====>", Deletepost);
       navigate('/');
     } catch (error) {

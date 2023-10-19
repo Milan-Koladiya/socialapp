@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import useToken from "../../hook/useToken";
 import { useNavigate, useParams } from "react-router-dom";
+import Clientaxios from "../../api/axios";
 
 const UpdatePost = (e) => {
   // e.preventDefault();
@@ -19,23 +20,30 @@ const UpdatePost = (e) => {
     try {
   console.log("postId======>", id);
 
-      const UpdatePostRes = await fetch(
-        `http://localhost:4500/update/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: title,
-            description: description,
-          }),
-        }
-      );
+      // const UpdatePostRes = await fetch(
+      //   `http://localhost:4500/update/${id}`,
+      //   {
+      //     method: "PUT",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       title: title,
+      //       description: description,
+      //     }),
+      //   }
+      // );
  
+      // const updateP = await UpdatePostRes.json();
 
-      const updateP = await UpdatePostRes.json();
+
+      const UpdatePostRes = await Clientaxios.put(`/update/${id}`,{
+        title:title,
+        description:description
+      });
+      const updateP = await UpdatePostRes.data;
+      
       console.log("updateP=====>", updateP);
       navigate('/allpost')
     } catch (error) {

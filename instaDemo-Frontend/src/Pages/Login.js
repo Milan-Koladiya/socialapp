@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import useToken from "../hook/useToken";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+import Clientaxios from "../api/axios";
 
 // const Login = ({setToken}) => {
 const Login = () => {
@@ -19,16 +21,26 @@ const Login = () => {
     // navigate('/dtfrhgdr');
 
     e.preventDefault();
+    const axiosInstance = Clientaxios();
     try {
-      const LoginResponce = await fetch("http://localhost:4500/login", {
-        method: "POST",
-        headers: { "content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+
+      // const LoginResponce = await fetch("http://localhost:4500/login", {
+      //   method: "POST",
+      //   headers: { "content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     email: email,
+      //     password: password,
+      //   }),
+      // });
+      // const Token = await LoginResponce.json();
+
+      const LoginResponce = await axiosInstance.post("/login",{
+        email: email,
+        password: password,
       });
-      const Token = await LoginResponce.json();
+     
+      const Token = await LoginResponce.data;
+      
 
       // -------as we get props setToken is function as below in useToken Custom hook--------
       // const setToken = (userToken) => {
@@ -78,24 +90,41 @@ const Login = () => {
         <button type="submit">Submit</button>
       </form> */}
 
-
-
       <Form onSubmit={handleLoginSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-     
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-      </Form.Group>
-      
-      <Button variant="primary" type="submit">
-        Submit
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <h3 className="mt-4">Not Register...? </h3>
+      <Button variant="">
+        <Link to="/sigIn">Register Here</Link>
       </Button>
-    </Form>
     </>
   );
 };

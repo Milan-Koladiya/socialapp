@@ -6,11 +6,17 @@ import useToken from "../../../hook/useToken";
 const RejectFollowReq = ({ rejectFollowId }) => {
   const { token } = useToken();
   const [rejectReq, setRejectReq] = useState({});
+   
+  console.log("rejectFollowId===>",rejectFollowId);
 
   const handleRejectFollowReq = async () => {
+     const RejectFollowID = rejectFollowId._id;
+     console.log("RejectFollowID=======>",RejectFollowID);
+  const rejectUserName = rejectFollowId.userName;
+  console.log("rejectUserName======>",rejectUserName);
     try {
       const rejectFollowReq = await fetch(
-        `http://localhost:4500/rejectFollow/${rejectFollowId}`,
+        `http://localhost:4500/rejectFollow/${RejectFollowID}`,
         {
           method: "POST",
           headers: {
@@ -21,6 +27,7 @@ const RejectFollowReq = ({ rejectFollowId }) => {
 
       const RejectReq = await rejectFollowReq.json();
       console.log("rejectRequestStatus====>", RejectReq);
+      alert(`you reject follow request of ${rejectUserName}`);
       // if ({ status: "pending" }) {
       //     setRejectReq(
       //         rejectReq.filter(
@@ -28,9 +35,9 @@ const RejectFollowReq = ({ rejectFollowId }) => {
       //     )
       //   );
       // }
-      setRejectReq((prevRequest)=>{
-        prevRequest.filter((request)=>request.follower !== rejectFollowId);
-      })
+      // setRejectReq((prevRequest)=>{
+      //   prevRequest.filter((request)=>request.follower !== RejectFollowID);
+      // })
     } catch (error) {
       console.log("reject Follow Req Error:", error);
     }

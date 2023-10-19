@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useToken from "../../hook/useToken";
@@ -10,10 +10,10 @@ const Searchbar = () => {
   const { token } = useToken();
 
   const [query, setQuery] = useState();
-  const [searchResult, setSearchResult] = useState();
+  const [searchResult, setSearchResult] = useState([]);
   const [smShow, setSmShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
-
+   console.log("search state======>",searchResult);
   const handleSearch = async (e) => {
     const searchResponce = await fetch(
       ` http://localhost:4500/search/users?search=${query}`,
@@ -25,19 +25,24 @@ const Searchbar = () => {
       }
     );
     // const { alluser } = await searchResponce.json();
-    const searchUser= await searchResponce.json();
-
-     if(searchUser.alluser?.length > 0)
-   {
-
-       setSearchResult(searchUser?.alluser);   
-    }else{
-       alert("user not found");
-   }
+    const searchUser = await searchResponce.json();
+    console.log("searchUser====================>", searchUser.alluser);
+    const searchUserName = searchUser?.alluser?.map((name)=>name.name);
+    console.log("searchusername======>",searchUserName);
+    if (searchUser.alluser?.length > 0) {
+      // setSearchResult(searchUser?.alluser?.map((searchname)=>searchname.name));
+      setSearchResult(searchUser?.alluser);
+    } else {
+      setSearchResult([]);
+      alert("user not found");
+    }
+    // console.log("serach user=======>", searchResult);
   };
-const show=()=>{
+  // setSearchResult();
+  const show = () => {
     setSmShow(true);
-}
+  };
+
   return (
     <>
       <Form className="d-flex">
@@ -51,13 +56,21 @@ const show=()=>{
           className="me-2"
           aria-label="Search"
         />
-        <Button variant="outline-success" onClick={()=>{handleSearch(); show();}}>
+        <Button
+          variant="outline-success"
+          onClick={() => {
+            handleSearch();
+            show();
+          }}
+        >
           Search
         </Button>
       </Form>
 
+     
+
       {/* <div className="searchUserDisplay"> */}
-        {/* <ul>
+      {/* <ul>
           {searchResult?.map((user) => {
             return (
               <>
@@ -66,31 +79,30 @@ const show=()=>{
               </>
             );
           })} */}
-          {searchResult ?.map((user) => {
-            return (
-              <>
-                {/* <Button onClick={() => setSmShow(true)} className="me-2">
-                  Small modal
-                </Button> */}
-
-                <Modal
-                  size="sm"
-                  show={smShow}
-                  onHide={() => setSmShow(false)}
-                  aria-labelledby="example-modal-sizes-title-sm"
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title id="example-modal-sizes-title-sm">
-                      {user.userName}
-                    </Modal.Title>
-                    <FollowUserProfile />
-                  </Modal.Header>
-                  {/* <Modal.Body>...</Modal.Body> */}
-                </Modal>
-              </>
-            );
-          })}
-     
+      {searchResult?.map((user) => {
+        return (
+          <>
+            {/* <Button onClick={() => setSmShow(true)} className="me-2">
+                 Small modal
+                </Button>  */}
+ 
+           <Modal
+              size="sm"
+              show={smShow}
+              onHide={() => setSmShow(false)}
+              aria-labelledby="example-modal-sizes-title-sm"
+            > 
+              <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-sm">
+                  {user.name}
+                </Modal.Title>
+                <FollowUserProfile followID={user._id} />
+              </Modal.Header>
+             {/* <Modal.Body>...</Modal.Body>  */}
+            </Modal>
+          </>
+        );
+      })} 
     </>
   );
 };

@@ -12,6 +12,8 @@ import { MenuBar, Navbar } from "../Components/Navbar";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Button } from "react-bootstrap";
 import AllPost from "../Components/Post/AllPost";
+import Clientaxios from "../api/axios";
+import axios from "axios";
 // function setToken(userToken) {
 //   sessionStorage.setItem("token", JSON.stringify(userToken));
 // }
@@ -29,22 +31,35 @@ export const Home = () => {
   // if (!token) {
   //   return <Login setToken={setToken} />;
   // }
+  const axiosInstance = Clientaxios();
   const [data, setData] = useState([]);
   const handleUserInfo = async () => {
     try {
-      const UserDataResponce = await fetch("http://localhost:4500/login/data", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const UserInfo = await UserDataResponce.json();
+      // const UserDataResponce = await fetch("http://localhost:4500/login/data", {
+      //     method: "GET",
+      //     headers: {
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     });
+      //     const UserInfo = await UserDataResponce.json();
+
+
+      const UserDataResponce = await axiosInstance.get("/login/data");
+
+      const UserInfo = await UserDataResponce.data;
+
       console.log("USer Infor========>", UserInfo);
+
+      // const UserDataResponce = await axios.get("http://localhost:4500/login/data");
+      // const UserInfo = await UserDataResponce.data
+      // console.log("res.data========>",UserDataResponce.data);
+
       setData(UserInfo);
     } catch (error) {
       console.log("user All data=======>", error);
     }
   };
+
   useEffect(() => {
     handleUserInfo();
   }, []);
@@ -76,7 +91,7 @@ export const Home = () => {
                 <ListGroup.Item>
                   <h5>Email : {data.email}</h5>
                 </ListGroup.Item>
-                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                {/* <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
               </ListGroup>
               <Card.Body>
                 {/* <Button variant="outline-secondary">

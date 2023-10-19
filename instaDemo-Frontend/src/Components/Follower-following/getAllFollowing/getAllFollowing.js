@@ -5,6 +5,7 @@ import { MenuBar } from "../../Navbar";
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import UnfollowUserButton from "../../UI Component/UnfollowUserButton";
+import Clientaxios from "../../../api/axios";
 
 const Following = () => {
   const { token } = useToken();
@@ -16,20 +17,25 @@ const Following = () => {
     
 
     try {
-      const FollowingResponce = await fetch(
-        "http://localhost:4500/getFollowing",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const GetFollowing = await FollowingResponce.json();
+      // const FollowingResponce = await fetch(
+      //   "http://localhost:4500/getFollowing",
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      // const GetFollowing = await FollowingResponce.json();
+
+      const FollowingResponce =await Clientaxios.get('/getFollowing');
+      const GetFollowing =await FollowingResponce.data;
+      
       console.log("get All Following====>", GetFollowing);
       console.log("get All FollowingID====>", GetFollowing?.Following?.following);
 
 
+      
       let confirmFollowing = GetFollowing?.Following.filter((follow)=>follow.status == "accepted");
 
       console.log("confirmFollowing=========>",confirmFollowing);
