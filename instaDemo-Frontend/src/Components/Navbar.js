@@ -12,13 +12,13 @@ export const MenuBar = () => {
      
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Social Media</Navbar.Brand>
+          <Navbar.Brand href="/">Social Media</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href=""><Link to='/'>Home</Link></Nav.Link>
-            <Nav.Link href=""><Link to='/follower'>Follower</Link></Nav.Link>
-            <Nav.Link href=""><Link to='/following'>Following</Link></Nav.Link>
-            <Nav.Link href=""><Link to='/newPost'>Post</Link></Nav.Link>
-            <Nav.Link href=""><Link to='/notifaction'>Notifaction</Link></Nav.Link>
+            <Nav.Link ><Link to='/'>Home</Link></Nav.Link>
+            <Nav.Link ><Link to='/follower'>Follower</Link></Nav.Link>
+            <Nav.Link ><Link to='/following'>Following</Link></Nav.Link>
+            <Nav.Link ><Link to='/newPost'>Post</Link></Nav.Link>
+            <Nav.Link ><Link to='/notifaction'>Notifaction</Link></Nav.Link>
           </Nav>
           <Searchbar />
           <Button variant="outline-danger"><Link to="/logout">Logout</Link></Button>

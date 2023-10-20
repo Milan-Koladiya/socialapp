@@ -14,6 +14,7 @@ const UpdatePost = (e) => {
 
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
+const axiosInstance = Clientaxios();
 
   console.log("postId======>", id);
   const handleUpdate = async () => {
@@ -38,7 +39,7 @@ const UpdatePost = (e) => {
       // const updateP = await UpdatePostRes.json();
 
 
-      const UpdatePostRes = await Clientaxios.put(`/update/${id}`,{
+      const UpdatePostRes = await axiosInstance.put(`/update/${id}`,{
         title:title,
         description:description
       });

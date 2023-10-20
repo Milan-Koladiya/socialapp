@@ -6,14 +6,15 @@ const   GetAllFollower = async (req, res) => {
   try {
     const MyId = req.user._id;
     console.log("myid===>" + MyId);
-
+     
     const AllFollower = await Follow.find({
       user: MyId,
-
+      
       // status: "follower",
     }).populate('follower')
     console.log("AllFollower=====>",AllFollower);
-    if (AllFollower.length > 0) {
+    
+    if (AllFollower.length > 0 ) {
       res
         .status(200)
         .json({

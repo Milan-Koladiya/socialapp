@@ -21,6 +21,11 @@ const AllPost = () => {
   const [description, setDescription] = useState("");
   const [id, setId] = useState();
 
+  const axiosInstance = Clientaxios();
+useEffect(()=>{
+   handleAllPost();
+       
+},[])
   // const history = useHistory();
 
   const handleAllPost = async (e) => {
@@ -35,23 +40,20 @@ const AllPost = () => {
       // });
 
       // const usersPosts = await allPostResponce.json();
-      const allPostResponce = await Clientaxios.get('/user/posts');
+      const allPostResponce = await axiosInstance.get("/user/posts");
       const usersPosts = await allPostResponce.data;
+
       setPosts(usersPosts?.allpost);
     } catch (error) {
       console.log("All pOst error=======>", error);
     }
   };
-useEffect(()=>{
+  useEffect(() => {
     handleAllPost();
-
-
-},[]);
+  }, []);
   const handleTrue = () => {
     setHandle(true);
   };
-
-
 
   const handleConfirmUpdate = (e) => {
     // history.push(generatePath`/updatePost/${id}`));
@@ -86,13 +88,16 @@ useEffect(()=>{
     <>
       <Button onClick={handleAllPost}>show All post</Button>
       {posts?.map((item, i) => {
-        console.log('item?.image', item?.image)
-        return (
+        console.log("item?.image===========", item?.image);
+        return (        
           <>
-            <div className="text-center" >
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={`http://localhost:4500/${item.image}`}>
-                {/* <Card.Img variant="top" src={`http://localhost:4500/posts/images.jpeg`}> */}
+            <div className="d-flex justify-content-center mt-4" >
+              <Card style={{ width: "18rem" }} >
+                <Card.Img
+                  variant="top"
+                  src={`http://localhost:4500/${item?.image}`}
+                >
+                  {/* <Card.Img variant="top" src={`http://localhost:4500/posts/images.jpeg`}> */}
                   {/* {item.image} */}
                 </Card.Img>
                 <Card.Body>
@@ -101,9 +106,13 @@ useEffect(()=>{
                   {/* <p >posted at:{item.createAt}</p> */}
                   {/* <Button variant="primary">Go somewhere</Button> */}
 
-                  <Button variant="info" postId={item.id} ><Link to={`/updatePost/${item._id}`}>Update post</Link></Button>
-                 
-                 <Button variant="info"><Link to={`/deletepost/${item._id}`}>Delete Post</Link></Button>
+                  <Button variant="info" postId={item.id}>
+                    <Link to={`/updatePost/${item._id}`}>Update post</Link>
+                  </Button>
+
+                  <Button variant="info">
+                    <Link to={`/deletepost/${item._id}`}>Delete Post</Link>
+                  </Button>
                   {/* <Button variant="info" postId={item.id}><Link to='/updatePost'>Update post</Link></Button> */}
                   {/* <Button
                     variant="info"
@@ -115,9 +124,8 @@ useEffect(()=>{
                   >
                     Update Post
                   </Button> */}
- 
-                  {/* {handle ? <UpdatePost postId={item.id}></UpdatePost> : null} */}
 
+                  {/* {handle ? <UpdatePost postId={item.id}></UpdatePost> : null} */}
 
                   {/* <DeletePostButton deletePostId={item._id} ></DeletePostButton> */}
                 </Card.Body>

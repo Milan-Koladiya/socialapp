@@ -10,6 +10,7 @@ import Clientaxios from "../../../api/axios";
 const Following = () => {
   const { token } = useToken();
   const [allFollowing, setAllFollowing] = useState([]);
+ const axiosInstance = Clientaxios();
 
   const handleFollowing = async (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const Following = () => {
       // );
       // const GetFollowing = await FollowingResponce.json();
 
-      const FollowingResponce =await Clientaxios.get('/getFollowing');
+      const FollowingResponce =await axiosInstance.get('/getFollowing');
       const GetFollowing =await FollowingResponce.data;
       
       console.log("get All Following====>", GetFollowing);
@@ -103,6 +104,7 @@ const Following = () => {
               </ListGroup.Item>
             );
           })}
+          
         </ListGroup>
       </div>
       {/* {(allFollowing || [])?.map((user, id) => {

@@ -98,7 +98,7 @@ const Following = async (req, res) => {
       user: LoginUserId,
       following: AnotherUserId,
       status: "pending",
-    });
+    }); 
     console.log("userSendFollowRequest" + newSendFollowReq);
 
     await newSendFollowReq.save();

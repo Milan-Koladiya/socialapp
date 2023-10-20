@@ -14,6 +14,7 @@ import { Button } from "react-bootstrap";
 import AllPost from "../Components/Post/AllPost";
 import Clientaxios from "../api/axios";
 import axios from "axios";
+
 // function setToken(userToken) {
 //   sessionStorage.setItem("token", JSON.stringify(userToken));
 // }
@@ -43,16 +44,11 @@ export const Home = () => {
       //     });
       //     const UserInfo = await UserDataResponce.json();
 
-
       const UserDataResponce = await axiosInstance.get("/login/data");
 
       const UserInfo = await UserDataResponce.data;
 
       console.log("USer Infor========>", UserInfo);
-
-      // const UserDataResponce = await axios.get("http://localhost:4500/login/data");
-      // const UserInfo = await UserDataResponce.data
-      // console.log("res.data========>",UserDataResponce.data);
 
       setData(UserInfo);
     } catch (error) {
@@ -65,16 +61,19 @@ export const Home = () => {
   }, []);
   return (
     <>
-      {/* <h3>Home Page</h3> */}
-
-      <div className="container-fluid">
+      <div className="container me-4">
+        
         <MenuBar />
 
         <div>
           {/* <Button onClick={handleUserInfo}> Get user Info</Button> */}
 
-          <div className="text-center mt-4">
-            <Card style={{ width: "28rem" }} className="card col-6 offset-3">
+          <div className="text-center mt-4 ms-5">
+            <Card
+              style={{ width: "28rem" }}
+              className="card col-6 offset-3"
+              key={data._id}
+            >
               {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
               <Card.Body>
                 <Card.Title>

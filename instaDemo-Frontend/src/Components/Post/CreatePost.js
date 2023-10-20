@@ -6,15 +6,18 @@ import useToken from "../../hook/useToken";
 import { MenuBar } from "../Navbar";
 import { useNavigate } from "react-router-dom";
 import Clientaxios from "../../api/axios";
+import axios from "axios";
 
 const CreatePost = (e) => {
 const {token} = useToken();
 const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-  const [file, setFile] = useState(null);
+
+const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
+const [image, setImage] = useState(null);
+const [file, setFile] = useState(null);
+const axiosInstance = Clientaxios();
 //  const ImgInputRef = useRef(null);
 
 // useEffect(()=>{
@@ -27,6 +30,8 @@ console.log("image======> ",image);
       setFile(URL.createObjectURL(e.target.files[0]));
   };
 
+
+  
   const handleCreatePost = async () => {
     console.log("create post")
     try {
@@ -42,11 +47,43 @@ console.log("image======> ",image);
       //   },
       //   body: formData,
       // });
+      // const Post = await newPostResponce.json();
 
-      const newPostResponce = await Clientaxios.post('/user/post',{
-        formData
-      })
-      const Post = await newPostResponce.json();
+ 
+      const newPostResponce = await axiosInstance.post('/user/post',
+        formData,
+       
+      {
+        headers: { 
+        "Content-Type": "multipart/form-data",
+    //     // 'Content-Type': 'application/json',
+    //     // 'Authorization': `Bearer ${token?.token}`,
+
+      },
+    }
+      )
+           
+      console.log("Responce ======after")
+
+      const Post = await newPostResponce.data;
+      
+    //   const token  = JSON.parse(sessionStorage.getItem("token"))
+    //   console.log("token=====>",token);
+
+    //  const newPostResponce = await axios.post(`http://localhost:4500/user/post`,{
+
+    //   data: formData,
+    //   headers: { 
+    //     "Content-Type": "multipart/form-data",
+    //     // 'Content-Type': 'application/json',
+    //     // 'Authorization': `Bearer ${token?.token}`,
+
+    //   },
+    //  })
+    //   const Post = await newPostResponce.data;
+
+
+
       console.log("Post", Post);
       navigate('/allpost'); 
     } catch (error) {

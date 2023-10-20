@@ -14,7 +14,8 @@ const PostLike = async (req, res) => {
     const FindLike = await Like.find({
       user: userId,
       post: postId,
-    });
+    })
+    // .populate(user);
     console.log("FindLike====>", FindLike);
     if (FindLike.length > 0) {
       return res.status(400).json({
@@ -25,6 +26,7 @@ const PostLike = async (req, res) => {
       user: userId,
       post: postId,
     });
+
     await newlike.save();
     console.log("Like=====>" + newlike);
     res.status(200).json({
@@ -39,6 +41,7 @@ const PostLike = async (req, res) => {
 };
 
 module.exports = PostLike;
+
 
 //   app.get('/api/posts', async (req, res) => {
 //     try {

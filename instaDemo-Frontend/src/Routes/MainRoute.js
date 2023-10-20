@@ -16,6 +16,7 @@ import CreatePost from "../Components/Post/CreatePost";
 import AllPost from "../Components/Post/AllPost";
 import UpdatePost from "../Components/UI Component/UpdatePost";
 import DeletePostButton from "../Components/UI Component/DeletePostButton";
+import UpdatedNotifaction from "../Components/Follower-following/Notifaction/updatedNotifaction";
 
 const MainRoute = () => {
   const { token } = useToken();
@@ -37,15 +38,22 @@ const MainRoute = () => {
           element={token ? <Following /> : <Login />}
         ></Route>
 
-        <Route
+        {/* <Route
           path="/notifaction"
           element={token ? <Notifaction /> : <Login />}
-        ></Route>
+        ></Route> */}
+    <Route 
+    path="/notifaction"
+    element={token ? <UpdatedNotifaction /> : <Login />}
+    >
+
+    </Route>
+
         <Route
           path="/newPost"
           element={token ? <CreatePost /> : <Login />}
         ></Route>
-
+        
         <Route
           path="/allpost"
           element={token ? <AllPost /> : <Login />}

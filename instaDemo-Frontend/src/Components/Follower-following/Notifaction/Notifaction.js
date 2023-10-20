@@ -144,12 +144,14 @@ import Clientaxios from "../../../api/axios";
 
 // export default Notifaction;
 
+
 const Notifaction = () => {
   const { token } = useToken();
+const axiosInstance = Clientaxios();
 
   // State to hold follower requests
   const [allFollowerReq, setAllFollowerReq] = useState([]);
-
+  
   // Function to fetch and display all follower requests
 
   const handleAllFollowerReq = async (e) => {
@@ -169,7 +171,7 @@ const Notifaction = () => {
 
     //   const GetFollowerReq = await resAllfollowerReq.json();
 
-    const resAllfollowerReq = await Clientaxios.get('/getFollower');
+    const resAllfollowerReq = await axiosInstance.get('/getFollower');
     const GetFollowerReq = await resAllfollowerReq.data;
       console.log("GetFollowReq=======>", GetFollowerReq);
 
@@ -244,7 +246,13 @@ const Notifaction = () => {
               {/* =======main======== */}
               <RejectFollowReq rejectFollowId={user.follower} />
               <AcceptFollowButton AcceptReqId={user.follower} />
-               
+                  {/* <Button
+//                     variant="outline-danger"
+//                     className="me-3"
+//                     onClick={() => handleRejectFollowReq(user.follower)}
+//                   >
+//                     Reject
+//                   </Button> */}
               {/* <Button onClick={()=>{handleAcceptFollowReq(user.follower); handleAllFollowerReq();}}>Accept</Button> */}
             </div>
           </ListGroup.Item>
@@ -253,5 +261,6 @@ const Notifaction = () => {
     </>
   );
 };
+
 
 export default Notifaction;

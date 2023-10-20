@@ -8,17 +8,19 @@ import Clientaxios from "../../../api/axios";
 
 const FollowUserProfile = ({followID}) => {
   const { token } = useToken();
+  const axiosInstance = Clientaxios();
+
   const handleFollowClick = async (e) => {
      console.log("followId==========>",followID);
     e.preventDefault();
     // const user = {
     //   id: "651e5fd8c81ff322a5f8ecd0",
     // };
-    const id = followID
-    console.log("targetedUserId=====>", id);
+    // const id = followID
+    // console.log("targetedUserId=====>", id);
     try {
       // const sendFollowingResponce = await fetch(
-      //   `http://localhost:4500/following/${user.id}`,
+      //   `http://localhost:4500/following/${followID}`,
       //   {
       //     method: "POST",
       //     headers: {
@@ -28,7 +30,12 @@ const FollowUserProfile = ({followID}) => {
       // );
       // const sendFollowing = await sendFollowingResponce.json();
 
-      const sendFollowingResponce = await Clientaxios.post(`/following/${followID}`);
+    
+
+     console.log("first==========>")
+      const sendFollowingResponce = await axiosInstance.post(`/following/${followID}`);
+     console.log("second==========>")
+
       const sendFollowing = await sendFollowingResponce.data;
 
 

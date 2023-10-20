@@ -47,6 +47,9 @@ const followSchema = new mongoose.Schema({
     default: 'pending',
   },
 });
+
+
+
 const Follow = mongoose.model('follow',followSchema);
 module.exports = Follow;
 

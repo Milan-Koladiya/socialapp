@@ -3,7 +3,6 @@ const Post = require("../../model/PostSchema");
 
 
 const CreatePost = async (req, res) => {
-  console.log("cretae post====>", req)
   // router.post("/post",verifyToken,async(req,res)=>{
   try {
     
@@ -16,10 +15,11 @@ const CreatePost = async (req, res) => {
       })
       // return res.status(200).send("you don't have any post");
     }
+   const ImgPath= req.file.path.split("/").slice(1).join("/");
     const newPost = new Post({
       title: req.body.title,
       description: req.body.description,
-      image: req.file.path,
+      image: ImgPath,
       author: req.user.id,
     });
     await newPost.save();

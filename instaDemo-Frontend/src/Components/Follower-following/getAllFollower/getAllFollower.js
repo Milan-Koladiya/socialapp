@@ -47,10 +47,15 @@ console.log("getFollower=================>",GetFollower);
 
 
 
-      let confirmFollower = GetFollower?.followers.filter((follow)=>follow.status == "accepted");
+      // let confirmFollower = GetFollower?.followers.filter((follow)=>follow.status == "accepted");
 
-      console.log("confirmFollower=========>",confirmFollower);
+      // console.log("confirmFollower=========>",confirmFollower);
         
+
+      const confirmFollower = GetFollower?.followers.filter((getStatus)=>getStatus.status != "pending" );
+
+      console.log("confirm Follower=======>",confirmFollower);
+
       if(confirmFollower.length > 0)
       {
         setAllFollower(confirmFollower);
@@ -58,6 +63,7 @@ console.log("getFollower=================>",GetFollower);
       }else{
         alert("you have not any follower");
       }
+      
       
     
       // setAllFollower(GetFollower?.followers);

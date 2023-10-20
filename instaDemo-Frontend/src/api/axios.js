@@ -27,10 +27,11 @@
 import axios from 'axios';
 import useToken from '../hook/useToken';
 
-const Clientaxios = () => {
+const   Clientaxios = () => {
 
   const token  = JSON.parse(sessionStorage.getItem("token"))
-
+  // const token  = (sessionStorage.getItem("token"))
+//  console.log("token=======>",token);
   const client = axios.create({
     baseURL: 'http://localhost:4500',
     headers: {
