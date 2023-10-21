@@ -9,8 +9,7 @@ const   GetAllFollower = async (req, res) => {
      
     const AllFollower = await Follow.find({
       user: MyId,
-      
-      // status: "follower",
+            // status: "follower",
     }).populate('follower')
     console.log("AllFollower=====>",AllFollower);
     

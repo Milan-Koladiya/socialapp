@@ -33,6 +33,7 @@ const DeletePostButton = () => {
       //   console.log("axiosInstance========>",axiosInstance);
       // console.log("deletepost Res")
 
+
       
       const DeletePostRes = await axiosInstance.delete(`/post/delete/${deletePostId}`);
       const Deletepost = await DeletePostRes.data;
@@ -70,10 +71,14 @@ const DeletePostButton = () => {
       console.log("on delete all post error=======>", error);
     }
   };
+
+    
+
   // useEffect(()=>{
   //     FetchAllPost();
   //     handleDelete();
   // },[])
+
   return (
     <>
        <div

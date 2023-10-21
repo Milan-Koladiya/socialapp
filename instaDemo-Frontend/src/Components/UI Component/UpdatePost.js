@@ -17,7 +17,9 @@ const UpdatePost = (e) => {
 const axiosInstance = Clientaxios();
 
   console.log("postId======>", id);
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+e.preventDefault();
+
     try {
   console.log("postId======>", id);
 
@@ -57,18 +59,18 @@ const axiosInstance = Clientaxios();
   return (
     <>
     <h3>Update post</h3>
-    <div>
+    {/* <div>
         <label>Title:</label>
       <input type="text" name="title" value={title} onChange={(e)=>{setTitle(e.target.value)}}></input>
       <label>Description:</label>
       <input type="text" name="description" value={description} onChange={(e)=>{setDescription(e.target.value)}}></input>
    
     </div>
-      <Button onClick={handleUpdate}>confirm update post</Button>
+      <Button onClick={handleUpdate}>confirm update post</Button> */}
 
 
   
-      {/* <Form onSubmit={handleUpdate}>
+      <Form onSubmit={handleUpdate}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title : </Form.Label>
         <Form.Control type="text" placeholder="Enter Title" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
@@ -83,7 +85,7 @@ const axiosInstance = Clientaxios();
       <Button variant="primary" type="submit" >
         Confirm Update
       </Button>
-    </Form> */}
+    </Form>
     </>
   );
 };

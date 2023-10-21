@@ -31,6 +31,8 @@ const PostLike = require('../controllers/Likes/likes');
 const AcceptFollowReq = require('../controllers/follower-following/acceptFollowReq');
 const RejectFollowReq = require('../controllers/follower-following/rejectFollowReq');
 const searchUser = require('../controllers/User/searchUser');
+const AllLikes = require('../controllers/Likes/allLikes');
+// const AllLikes = require('../controllers/Likes/allLikes');
 
 //registration
 router.post('/registration',UserRegistration);
@@ -75,6 +77,7 @@ router.post('/following/:id',VerifyToken,Following);
 //accept Follow Req 
 router.post('/acceptFollow/:id',VerifyToken,AcceptFollowReq);
 
+
 //reject Follow Req
 router.post('/rejectFollow/:id',VerifyToken,RejectFollowReq);
 
@@ -89,6 +92,11 @@ router.get('/getFollowing',VerifyToken,GetAllFollowing);
 
 //LikePost //pass post id
 router.post('/likes/:id',VerifyToken,PostLike);
+
+//allLikes 
+router.get('/likes/:id',VerifyToken,AllLikes);
+
+
 
 
 module.exports = router;

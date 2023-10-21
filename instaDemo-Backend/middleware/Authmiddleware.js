@@ -61,7 +61,7 @@ const VerifyToken = async (req, res, next) => {
     }
 
     //   res.json = isValidUser;
-    console.log("isvalidUser======>" + user);
+    // console.log("isvalidUser======>" + user);
     req.user = user;
     // res.json(req.user);
 

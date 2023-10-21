@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useToken from "../../../hook/useToken";
 import Button from "react-bootstrap/Button";
 import { MenuBar } from "../../Navbar";
@@ -12,48 +12,44 @@ const Following = () => {
   const [allFollowing, setAllFollowing] = useState([]);
  const axiosInstance = Clientaxios();
 
-  const handleFollowing = async (e) => {
-    e.preventDefault();
+  const getFollowing = async (e) => {
+    // e.preventDefault();
 
     
 
     try {
-      // const FollowingResponce = await fetch(
-      //   "http://localhost:4500/getFollowing",
-      //   {
-      //     method: "GET",
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   }
-      // );
-      // const GetFollowing = await FollowingResponce.json();
+  
 
       const FollowingResponce =await axiosInstance.get('/getFollowing');
       const GetFollowing =await FollowingResponce.data;
       
       console.log("get All Following====>", GetFollowing);
-      console.log("get All FollowingID====>", GetFollowing?.Following?.following);
+      // console.log("get All FollowingID====>", GetFollowing?.Following?.following);
 
-
+     
       
       let confirmFollowing = GetFollowing?.Following.filter((follow)=>follow.status == "accepted");
 
       console.log("confirmFollowing=========>",confirmFollowing);
         
+      
       if(confirmFollowing.length > 0)
       {
         setAllFollowing(confirmFollowing);
         
       }else{
-        alert("you have not any follower");
-      }
+        // alert("you have not any follower");
+        setAllFollowing([])
+      } 
       
+   
       // setAllFollowing(GetFollowing?.Following);
     } catch (error) {
       console.log("get All Following error", error);
     }
+
   };
+
   // const handleUnFollow = async (unfollwingId) => {
   //   console.log("unfollowingId====>",unfollwingId);
 
@@ -70,19 +66,23 @@ const Following = () => {
   //     console.log("unfollowUser====>", error);
   //   }
   // };
+  
+  useEffect(()=>{
+    getFollowing();
+  },[])
   return (
     <>
       {/* <h3>Following</h3> */}
       <div className="container">
         <MenuBar />
         <div className="text-center mt-5">
-          <Button
+          {/* <Button
             variant="outline-danger"
             className="text-center"
             onClick={handleFollowing}
           >
             get All Following
-          </Button>
+          </Button> */}
         </div>
 
         <ListGroup as="ol" numbered>

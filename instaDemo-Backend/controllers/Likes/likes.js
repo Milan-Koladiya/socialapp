@@ -3,6 +3,7 @@ const Like = require("../../model/LikeSchema");
 //user:loginUser
 //post:which is liked by user
 const PostLike = async (req, res) => {
+  console.log("first")
   try {
     // const { userId, PostId } = req.body;
     const userId = req.user._id;
@@ -13,13 +14,16 @@ const PostLike = async (req, res) => {
 
     const FindLike = await Like.find({
       user: userId,
-      post: postId,
-    })
+       }).populate('user post')  
+    
+
+       
     // .populate(user);
     console.log("FindLike====>", FindLike);
     if (FindLike.length > 0) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "You already Like this Post",
+        likes:FindLike,
       });
     }
     const newlike = new Like({
@@ -28,10 +32,11 @@ const PostLike = async (req, res) => {
     });
 
     await newlike.save();
-    console.log("Like=====>" + newlike);
+
     res.status(200).json({
       success: true,
       message: "You Like this Post",
+      likes:newlike
     });
   } catch (error) {
     res.status(500).json({

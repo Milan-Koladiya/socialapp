@@ -12,6 +12,8 @@ const GetAllFollowing = async (req, res) => {
       //   following
       //   status: "Following",
     }).populate("following");
+
+    
     console.log(FindFollowing);
     if (FindFollowing.length > 0) {
       res.status(200).json({

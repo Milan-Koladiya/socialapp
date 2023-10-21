@@ -16,7 +16,7 @@ const UpdatedNotifaction = () => {
 
   // Function to fetch and display all follower requests
 
-  const handleAllFollowerReq = async (e) => {
+  const getAllFollowRequest = async (e) => {
     // e.preventDefault();
 
     try {
@@ -44,7 +44,7 @@ const UpdatedNotifaction = () => {
       if (getStatus.length > 0) {
         setAllFollowerReq(getStatus);
       } 
-
+      
     } catch (error) {
       console.log("allFollowReq error", error);
     }
@@ -110,19 +110,24 @@ const UpdatedNotifaction = () => {
     }
   };
 
+   useEffect(()=>{
+    getAllFollowRequest();
+   },[])
+
   const updateFollowRequest = (requestId) => {
     console.log("requestId======>", requestId);
     setAllFollowerReq((previouseRequest) => {
       previouseRequest.filter((request) => request.follower._id !== requestId);
     });  
   };
+  
   return (
     <>
       <MenuBar />
       <div className="text-center mt-4">
-        <Button onClick={handleAllFollowerReq} className="">
+        {/* <Button onClick={getAllFollowRequest} className="">
           Show Follow Req
-        </Button>
+        </Button> */}
       </div>
 
       <ListGroup as="ol" numbered>

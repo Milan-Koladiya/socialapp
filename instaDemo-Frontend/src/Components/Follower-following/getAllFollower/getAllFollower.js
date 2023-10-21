@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import "../../../css files/HomeCss.css";
 import useToken from "../../../hook/useToken";
@@ -14,8 +14,8 @@ const Follower = () => {
 
   const axiosInstance = Clientaxios();
 
-  const handleAllFollower = async (e) => {
-    e.preventDefault();
+  const getAllFollower = async (e) => {
+    // e.preventDefault();
   
     try {
 
@@ -32,18 +32,10 @@ const Follower = () => {
 
       const followerResponce = await axiosInstance.get('/getFollower');
       const GetFollower =  followerResponce.data;
-
-
-
       // const followerResponce = axiosInstance.get('/getFollower')
 console.log("getFollower=================>",GetFollower);
       console.log("getFollower===>", GetFollower?.followers);
-      // console.log("getFollower===>", GetFollower?.followers[0].follower);
-      // console.log("getFollower===>", GetFollower?.followers?.[0]?.status);
-      // const getStatus = (GetFollower?.followers.map((status) => status.status)).toString();
-      // const followerList = (GetFollower?.followers.map((status)=>status.status)).filter((isAccepted)=> isAccepted !== "accepted")
-      // // getStatus.toString();
-      // console.log("getStatus", getStatus);
+  
 
 
 
@@ -70,7 +62,11 @@ console.log("getFollower=================>",GetFollower);
     } catch (error) {
       console.log("error" + error);
     }
+
   };
+  useEffect(()=>{
+     getAllFollower();
+  },[])
 
   // console.log("allFollower====>", allFollower);
 
@@ -81,13 +77,13 @@ console.log("getFollower=================>",GetFollower);
         {/* <h4 >Follower</h4> */}
         <div>
           <div className="text-center mt-5">
-            <Button
+            {/* <Button
               variant="outline-danger"
               className="text-center"
               onClick={handleAllFollower}
             >
               get All Follower
-            </Button>
+            </Button> */}
           </div>
           {/* <button onClick={handleAllFollower}>Follower</button> */}
         </div>

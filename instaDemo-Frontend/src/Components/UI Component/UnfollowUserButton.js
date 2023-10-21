@@ -49,11 +49,31 @@ const UnfollowUserButton = ({ unfollwingId }) => {
     
       navigate(-1);
 
+
+      // const userId = GetFollowing?.Following.map((getID)=>getID.following._id);
+      // console.log("userId from getAllFollowing=========>",userId);
+
+      // UpdateFollowing(unfollowingID);
+
+
     } catch (error) {
       console.log("unfollowUser====>", error);
 
     }
   };
+
+   const UpdateFollowing = (unfollowingID)=>{
+    console.log("userID in UpdateFollowing========>",unfollowingID);
+
+    setAllFollowing((previouseFollowing)=>{
+          previouseFollowing.filter((requestId)=>requestId.following._id !== unfollowingID)
+     })
+  }
+
+
+
+
+
 
   const handleFollowing = async (e) => {
     // e.preventDefault();
@@ -81,6 +101,8 @@ const UnfollowUserButton = ({ unfollwingId }) => {
 
       // console.log("confirmFollowing=========>", confirmFollowing);
       
+      
+
       setAllFollowing(GetFollowing)
    console.log("state update after unfollowing=======>",allFollowing);
       // if (confirmFollowing.length > 0) {
@@ -90,10 +112,15 @@ const UnfollowUserButton = ({ unfollwingId }) => {
       // }
 
       // setAllFollowing(GetFollowing?.Following);
+
+
+
+
     } catch (error) {
       console.log("get All Following error", error);
     }
   };
+console.log("state updated after UpdationFunction========>",allFollowing);
 
   return (
     <Button
