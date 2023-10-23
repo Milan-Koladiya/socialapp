@@ -32,6 +32,10 @@ const AcceptFollowReq = require('../controllers/follower-following/acceptFollowR
 const RejectFollowReq = require('../controllers/follower-following/rejectFollowReq');
 const searchUser = require('../controllers/User/searchUser');
 const AllLikes = require('../controllers/Likes/allLikes');
+const sendFollowing = require('../controllers/follower-following2/sendfollowreq');
+const acceptFollowReq = require('../controllers/follower-following2/acceptFollowReq');
+const GetAllFollowing2 = require('../controllers/follower-following2/getallFollowing');
+const GetAllFollower2 = require('../controllers/follower-following2/getallFollower');
 // const AllLikes = require('../controllers/Likes/allLikes');
 
 //registration
@@ -60,6 +64,13 @@ router.delete('/post/delete/:id',VerifyToken,DeletePost);
 router.get('/user/posts',VerifyToken,UserAllPost);
 
 
+//LikePost //pass post id
+router.post('/likes/:id',VerifyToken,PostLike);
+
+//allLikes 
+router.get('/likes/:id',VerifyToken,AllLikes);
+
+
 //   ===========Follower-Following Section=========
 // send request:---->following  following.js
 //accept request:---->acceptFollow  acceptFollowReq.js
@@ -67,34 +78,50 @@ router.get('/user/posts',VerifyToken,UserAllPost);
 //reject request--->rejectfollow  
 //unfollow request---->unfollow  unFollow.js
 
-//following 
-//here user send follow req and also anthoter user get follow req
-router.post('/following/:id',VerifyToken,Following);
+// //following 
+// //here user send follow req and also anthoter user get follow req
+// router.post('/following/:id',VerifyToken,Following);
 
-//getfollow request
-// router.post('/follow/:id',VerifyToken,Follower);
-
-//accept Follow Req 
-router.post('/acceptFollow/:id',VerifyToken,AcceptFollowReq);
+// //getfollow request
+// // router.post('/follow/:id',VerifyToken,Follower);
 
 
-//reject Follow Req
-router.post('/rejectFollow/:id',VerifyToken,RejectFollowReq);
+// //accept Follow Req 
+// router.post('/acceptFollow/:id',VerifyToken,AcceptFollowReq);
 
-//unfollow
-router.post('/unfollow/:id',VerifyToken,UnFollow);
 
-//GetAllFollower
-router.get('/getFollower',VerifyToken,GetAllFollower); 
+// //reject Follow Req
+// router.post('/rejectFollow/:id',VerifyToken,RejectFollowReq);
 
-//GetAllFollowing
-router.get('/getFollowing',VerifyToken,GetAllFollowing);
+// //unfollow
+// router.post('/unfollow/:id',VerifyToken,UnFollow);
 
-//LikePost //pass post id
-router.post('/likes/:id',VerifyToken,PostLike);
+// //GetAllFollower
+// router.get('/getFollower',VerifyToken,GetAllFollower); 
 
-//allLikes 
-router.get('/likes/:id',VerifyToken,AllLikes);
+// //GetAllFollowing
+// router.get('/getFollowing',VerifyToken,GetAllFollowing);
+
+// ===========follower -following 2nd==========
+
+
+//new schema FollowerSchema2.js
+//folder follower-following 2 inside controller
+
+//send follow req
+router.post('/following/:id',VerifyToken,sendFollowing);
+
+
+//accept (notifaction)
+router.post('/acceptFollowReq/:id',VerifyToken,acceptFollowReq);
+
+
+//getallFollowing
+router.get('/getFollowing',VerifyToken,GetAllFollowing2)
+
+//getallFollower
+router.get('/getFollower',VerifyToken,GetAllFollower2);
+
 
 
 

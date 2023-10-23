@@ -48,8 +48,6 @@ const followSchema = new mongoose.Schema({
   },
 });
 
-
-
 const Follow = mongoose.model('follow',followSchema);
 module.exports = Follow;
 

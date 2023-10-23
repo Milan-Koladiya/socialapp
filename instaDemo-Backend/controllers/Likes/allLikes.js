@@ -5,7 +5,7 @@ const AllLikes = async (req, res) => {
     const userId = req.user._id;
     console.log("UserId======>", userId);
 
-    const postId = req.params._id;
+    const postId = req.params.id;
     console.log("psotId=====>", postId);
 
     const FindLike = await Like.find({
@@ -13,14 +13,15 @@ const AllLikes = async (req, res) => {
     }).populate("user post");
 
     
+    console.log("FindLike======>", FindLike.length);
     if(FindLike.length > 0){
         return res.status(200).json({
             message:"this Post All Likes here",
             likes:FindLike,
+            likeCount:FindLike.length,
         })
     }
-
-    console.log("FindLike======>", FindLike);
+ 
   } catch (error) {}
 };
 

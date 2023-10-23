@@ -7,6 +7,7 @@ const PostAllLikes = (e) => {
   const { PostId } = useParams();
 
   const [data, setData] = useState([]);
+const [likeCount, setLikecount] = useState([]);
 
   const handleAllLikes = async (e) => {
     // e.preventDefault();
@@ -18,15 +19,23 @@ const PostAllLikes = (e) => {
     const LikeUserName = Likes?.likes?.map((name) => name?.user?.userName);
     // console.log("LikeUSerName=======>", LikeUserName);
     setData(LikeUserName);
+    console.log("Like Count======>",Likes.likeCount)
+    setLikecount(Likes.likeCount);
   };
   
+  
+
   console.log("data=======>", data);
   useEffect(() => {
     handleAllLikes();
   }, []);
+
+  
+
   return (
     <>
-      
+      <h5>Numbers of like: {likeCount}</h5>
+
       <ul>
         {data?.map((item) => {
           return (
@@ -35,6 +44,7 @@ const PostAllLikes = (e) => {
             </>
           );
         })}
+        {/* <p>{likeCount}</p> */}
       </ul>
     </>
   );

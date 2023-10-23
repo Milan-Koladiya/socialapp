@@ -5,11 +5,10 @@ import useToken from "../../hook/useToken";
 import { useNavigate } from "react-router-dom";
 import Clientaxios from "../../api/axios";
 
-const UnfollowUserButton = ({ unfollwingId }) => {
+const UnfollowUserButton = ({ unfollwingId, setAllFollowing }) => {
   const unfollowingID = unfollwingId._id;
   console.log("unfolwing id======>", unfollowingID);
   const { token } = useToken();
-  const [allFollowing, setAllFollowing] = useState([]);
   const axiosInstance = Clientaxios();
 
   const navigate = useNavigate();
@@ -104,7 +103,6 @@ const UnfollowUserButton = ({ unfollwingId }) => {
       
 
       setAllFollowing(GetFollowing)
-   console.log("state update after unfollowing=======>",allFollowing);
       // if (confirmFollowing.length > 0) {
       //   setAllFollowing(confirmFollowing);
       // } else {
@@ -120,7 +118,6 @@ const UnfollowUserButton = ({ unfollwingId }) => {
       console.log("get All Following error", error);
     }
   };
-console.log("state updated after UpdationFunction========>",allFollowing);
 
   return (
     <Button

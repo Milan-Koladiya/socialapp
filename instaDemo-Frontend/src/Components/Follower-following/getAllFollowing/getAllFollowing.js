@@ -84,7 +84,7 @@ const Following = () => {
             get All Following
           </Button> */}
         </div>
-
+      
         <ListGroup as="ol" numbered>
           {(allFollowing || [])?.map((user, id) => {
             return (
@@ -97,7 +97,7 @@ const Following = () => {
                   <div className="fw-bold">{user.following.userName}</div>
                 </div>
                 {/* <Button onClick={()=>handleUnFollow(user.following)} >Unfollow</Button> */}
-                <UnfollowUserButton unfollwingId={user.following} ></UnfollowUserButton>
+                <UnfollowUserButton unfollwingId={user.following} setAllFollowing={setAllFollowing} ></UnfollowUserButton>
                 {/* <Badge bg="primary" pill>
               14
             </Badge> */}

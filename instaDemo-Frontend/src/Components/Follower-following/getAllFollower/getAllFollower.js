@@ -33,7 +33,7 @@ const Follower = () => {
       const followerResponce = await axiosInstance.get('/getFollower');
       const GetFollower =  followerResponce.data;
       // const followerResponce = axiosInstance.get('/getFollower')
-console.log("getFollower=================>",GetFollower);
+console.log("getFollower=================>",GetFollower);   
       console.log("getFollower===>", GetFollower?.followers);
   
 
@@ -43,6 +43,15 @@ console.log("getFollower=================>",GetFollower);
 
       // console.log("confirmFollower=========>",confirmFollower);
         
+      // ==========this is for remove error=========
+      // const Follower = GetFollower?.followers.map((user)=>user.follower);
+      // console.log("Follower=======>",Follower);
+      // if(Follower == undefined)
+      // {
+      //   alert('YOu have not any Follower');
+      //   setAllFollower();
+      // }
+
 
       const confirmFollower = GetFollower?.followers.filter((getStatus)=>getStatus.status != "pending" );
 
